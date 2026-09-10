@@ -1,5 +1,5 @@
 *** Settings ***
-
+Library    String
 Documentation           New test suite
 # You can change imported library to "QWeb" if testing generic web application, not Salesforce.
 Library                 QForce 
@@ -57,28 +57,61 @@ Edit account
 # Creating Test Account 2
 #     Create Account Keyword    XYZ Corporation
 
-Create a Lead Record
+# Create a Lead Record
+#     Login To Salesforce
+#     ClickText    Leads
+#     VerifyText   Change Owner
+#     ClickText    New                partial_match=False
+#     VerifyText   Lead Information
+#     PickList     Salutation         Mr. 
+#     VerifyPicklist        Salutation    Mr.   selected=True
+#     ClickText    First Name
+#     TypeText     First Name         Lead
+#     Sleep        2s
+#     ClickText    Last Name
+#     TypeText     Last Name          01
+#     Sleep        2s
+#     CLickText    Company
+#     TypeText     Company            Cyntexa
+#     Sleep        2s
+#     Picklist     Lead Status        Open - Not Contacted
+#     Sleep        2s
+#     VerifyPicklist        Lead Status         Open - Not Contacted       selected=True
+#     Sleep                 2s
+#     ClickText             Save                partial_match=False
+#     VerifyText            Lead 01
+
+Creating a dynamic lead
     Login To Salesforce
-    ClickText    Leads
-    VerifyText   Change Owner
-    ClickText    New                partial_match=False
-    VerifyText   Lead Information
-    PickList     Salutation         Mr. 
-    VerifyPicklist        Salutation    Mr.   selected=True
-    ClickText    First Name
-    TypeText     First Name         Lead
-    Sleep        2s
-    ClickText    Last Name
-    TypeText     Last Name          01
-    Sleep        2s
-    CLickText    Company
-    TypeText     Company            Cyntexa
-    Sleep        2s
-    Picklist     Lead Status        Open - Not Contacted
-    Sleep        2s
-    VerifyPicklist        Lead Status         Open - Not Contacted       selected=True
-    Sleep                 2s
-    ClickText             Save                partial_match=False
-    VerifyText            Lead 01
+    ${random_Last_Name}=    Generate Random String    10    [UPPER]
+    ${random_Company_Name}=     Generate Random String    8    [UPPER]
+    Set Suite Variable    ${LAST_NAME}               ${random_Last_Name}
+    Set Suite Variable    ${COMPANY}                 ${random_Company_Name}
+    ClickText              Leads
+    ClickText     New
+    ClickText     Last Name
+    Sleep         2s
+    TypeText      Last Name                         ${LAST_NAME}
+    ClickText     Company
+    Sleep         2s
+    TypeText      Company                         ${COMPANY}
+    ClickText     Save                         partial_match=False
 
 Converting A Lead
+    ClickText     Leads
+    ClickText      ${LAST_NAME}
+    ClickText      Show more actions
+    ClickText      Convert
+    UseModal       On
+    ClickText      Convert     partial_match=False
+    UseModal        On
+    UseModal        On
+    ClickText       Go to Leads    
+
+Verifying the Accounts And Contact
+    ClickText     Accounts
+    ClickText     ${COMPANY}
+    VerifyText    ${COMPANY}
+    ClickText     ${LAST_NAME}
+    ClickText     ${COMPANY}
+    VerifyText    ${COMPANY}
