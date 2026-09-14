@@ -5,8 +5,10 @@ Documentation           New test suite
 Library                 QForce 
 Suite Setup             Open Browser    about:blank    chrome
 Suite Teardown          Close All Browsers
+***Variable***
+  ${source}     Open - Not Contacted 
 
-*** Test Cases ***
+
 
 *** Keywords ***
 Login To Salesforce
@@ -15,8 +17,9 @@ Login To Salesforce
     ClickText          Log In
     TypeText           Password            ${password}
     ClickText          Log In
-    TypeText           Verification Code    
+    TypeText           Verification Code    ${Verification}
     ClickText          Verify
+*** Test Cases ***
 Create a Account Record
     ClickText        Accounts
     VerifyText       Accounts
@@ -115,3 +118,25 @@ Verifying the Accounts And Contact
     ClickText     ${LAST_NAME}
     ClickText     ${COMPANY}
     VerifyText    ${COMPANY}
+
+Practice For IF ELSE
+    Login To Salesforce
+    Sleep    2s
+    ClickText    Accounts
+    ${account_name}=  Set Variable    Ronit
+    IF               Account Name == ${account_name}
+        Log      Account IS Present
+    ELSE
+        Log      Account IS Not Present    
+    END
+
+Checking Lead Status Using If ELSE
+    Login To Salesforce
+    ClickText    Leads
+    Sleep        2s
+    CLickText    NSDGSDUSAE
+    VerifyText    NSDGSDUSAE
+    ClickText     Details
+    ClickText     Lead Status
+    IF                ${source}==    Lead Status
+        Log           New Lead    
