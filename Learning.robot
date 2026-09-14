@@ -15,7 +15,7 @@ Login To Salesforce
     ClickText          Log In
     TypeText           Password            ${password}
     ClickText          Log In
-    TypeText           Verification Code    ${Verification}
+    TypeText           Verification Code    
     ClickText          Verify
 Create a Account Record
     ClickText        Accounts
