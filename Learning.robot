@@ -125,9 +125,9 @@ Practice For IF ELSE
     ClickText    Accounts
     IF           "Account Name" == "Ronit"    partial_match= False
         Log      Account IS Present
-    ELSE
+        ELSE
         Log      Account IS Not Present    
-    END
+        END
 
 Checking Lead Status Using If ELSE
     Login To Salesforce
@@ -136,7 +136,7 @@ Checking Lead Status Using If ELSE
     CLickText    NSDGSDUSAE
     VerifyText    NSDGSDUSAE
     ClickText     Details
-    ${selected}=    GetPickList    Status    selected=True
+    ${selected}=    GetFieldValue    Status
     IF                    ${status} == "Open - Not Contacted"
         Log           New Lead
     ELSE
