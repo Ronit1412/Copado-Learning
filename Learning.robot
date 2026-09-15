@@ -137,8 +137,8 @@ Checking Lead Status Using If ELSE
     VerifyText                 NSDGSDUSAE
     ClickText                  Details
     ${selected}=               GetFieldValue               Lead Status
-    IF                        $selected == "Open Not Contacted"
-        Log                    Value is ${selected}
+    IF                         $selected == "Open Not Contacted"
+        Log                    Lead Status is ${selected}
     ELSE
         Log                    Old Lead
 
@@ -152,10 +152,19 @@ Opportunity IF ELSE
     ClickText                  PHDUKCXF-
     VerifyText                 PHDUKCXF-
     ClickText                  Details
-    ${stage_value}=             Get Text                     xpath\=//records-record-layout-item[@field-label\='Stage']
+    ${stage_value}             GetText                     xpath\=//records-record-layout-item[@field-label\='Stage']
+    IF                        $stage_value == "Prospecting"
+        LOG                   Stage is ${stage_value} 
+    ELSE
+        LOG                   Stage is nothing   
+    END
 
-
-
-    # Practice For Loop
-    #                          Login To Salesforce
-
+Create Accounts With Enumerate
+@{ACCOUNT_NAMES}    Account1    Account2    Account
+    Login To Salesforce
+    ClickText    Accounts
+    FOR    ${index}    ${account_name}    IN ENUMERATE    @{ACCOUNT_NAMES}
+        ClickText      New
+        TypeText       xpath\=//records-record-layout-base-input[@data-input-element-id\='input-field']    ${account_name}
+        Log            Create Account ${index}: ${account_name}
+        ClickText      Save & New                        partial_match= True
