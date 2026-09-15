@@ -6,7 +6,7 @@ Library                 QForce
 Suite Setup             Open Browser    about:blank    chrome
 Suite Teardown          Close All Browsers
 ***Variable***
-  ${source}     Open - Not Contacted 
+${account_name}    Ronit
 
 
 
@@ -21,6 +21,7 @@ Login To Salesforce
     ClickText          Verify
 *** Test Cases ***
 Create a Account Record
+
     ClickText        Accounts
     VerifyText       Accounts
     ClickText        New                       partial_match=False 
@@ -123,8 +124,7 @@ Practice For IF ELSE
     Login To Salesforce
     Sleep    2s
     ClickText    Accounts
-    ${account_name}=  Set Variable    Ronit
-    IF               Account Name == ${account_name}
+    IF           "Account Name" == "Ronit"
         Log      Account IS Present
     ELSE
         Log      Account IS Not Present    
@@ -138,5 +138,11 @@ Checking Lead Status Using If ELSE
     VerifyText    NSDGSDUSAE
     ClickText     Details
     ClickText     Lead Status
-    IF                ${source}==    Lead Status
-        Log           New Lead    
+    Set Suite Variable    ${status}  
+    Set Suite Variable    ${Field_Value}    Open - Not Contacted
+    ${status}=            GetText     //lightning-formatted-text[normalize-space()='Open - Not Contacted']
+    IF                    ${status} == ${Field_Value} 
+        Log           New Lead
+    ELSE
+        Log           Old Lead
+    END            
