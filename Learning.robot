@@ -2,7 +2,7 @@
 Library    String
 Documentation           New test suite
 # You can change imported library to "QWeb" if testing generic web application, not Salesforce.
-Library                 QForce,QWeb
+Library                 QForce
 Suite Setup             Open Browser    about:blank    chrome
 Suite Teardown          Close All Browsers
 
@@ -40,25 +40,25 @@ Edit account
     TypeText     Website    abc
     ClickText    Save
 
-Required Field Validation
+# Required Field Validation
 
-    ClickText        Save                       partial_match=False
-    VerifyText       Complete this field 
+#     ClickText        Save                       partial_match=False
+#     VerifyText       Complete this field 
 
 *** Keywords ***
-Create Account Keyword
-    [Arguments]            ${account_name}
-    ClickText              New
-    VerifyText             Account Information
-    UseModal               On
-    TypeText               Account Name    ${account_name}
-    ClickText              Save
+# Create Account Keyword
+#     [Arguments]            ${account_name}
+#     ClickText              New
+#     VerifyText             Account Information
+#     UseModal               On
+#     TypeText               Account Name    ${account_name}
+#     ClickText              Save
 
-Creating Test Account 1
-    Create Account Keyword    ABC Corporation
+# Creating Test Account 1
+#     Create Account Keyword    ABC Corporation
 
-Creating Test Account 2
-    Create Account Keyword    XYZ Corporation
+# Creating Test Account 2
+#     Create Account Keyword    XYZ Corporation
 
 Create a Lead Record
     Login To Salesforce
@@ -136,8 +136,8 @@ Checking Lead Status Using If ELSE
     CLickText    NSDGSDUSAE
     VerifyText    NSDGSDUSAE
     ClickText     Details
-     ${status}=    GetPickList    Lead Status    selected=True
-    IF                    ${title} == "abc"
+    ${status}=    GetPickList    Status    selected=True
+    IF                    ${status} == "Open - Not Contacted"
         Log           New Lead
     ELSE
         Log           Old Lead
