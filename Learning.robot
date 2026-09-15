@@ -152,7 +152,7 @@ Opportunity IF ELSE
     ClickText                  PHDUKCXF-
     VerifyText                 PHDUKCXF-
     ClickText                  Details
-    ${stage_value}=             Get Text                     xpath/=//records-record-layout-item[@field-label/='Stage']
+    ${stage_value}=             Get Text                     xpath\=//records-record-layout-item[@field-label\='Stage']
 
 
 
