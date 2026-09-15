@@ -136,7 +136,8 @@ Checking Lead Status Using If ELSE
     CLickText    NSDGSDUSAE
     VerifyText    NSDGSDUSAE
     ClickText     Details
-    ${status}=    GetPickList    Lead Status    selected=True
+    ${title}=     Getfieldvalue    title
+    # ${status}=    GetPickList    Lead Status    selected=True
 #     IF                    ${status} == "Open - Not Contacted"
 #         Log           New Lead
 #     ELSE
