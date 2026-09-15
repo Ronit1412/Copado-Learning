@@ -40,49 +40,49 @@ Edit account
     TypeText     Website    abc
     ClickText    Save
 
-# Required Field Validation
+Required Field Validation
 
-#     ClickText        Save                       partial_match=False
-#     VerifyText       Complete this field 
+    ClickText        Save                       partial_match=False
+    VerifyText       Complete this field 
 
-# *** Keywords ***
-# Create Account Keyword
-#     [Arguments]            ${account_name}
-#     ClickText              New
-#     VerifyText             Account Information
-#     UseModal               On
-#     TypeText               Account Name    ${account_name}
-#     ClickText              Save
+*** Keywords ***
+Create Account Keyword
+    [Arguments]            ${account_name}
+    ClickText              New
+    VerifyText             Account Information
+    UseModal               On
+    TypeText               Account Name    ${account_name}
+    ClickText              Save
 
-# Creating Test Account 1
-#     Create Account Keyword    ABC Corporation
+Creating Test Account 1
+    Create Account Keyword    ABC Corporation
 
-# Creating Test Account 2
-#     Create Account Keyword    XYZ Corporation
+Creating Test Account 2
+    Create Account Keyword    XYZ Corporation
 
-# Create a Lead Record
-#     Login To Salesforce
-#     ClickText    Leads
-#     VerifyText   Change Owner
-#     ClickText    New                partial_match=False
-#     VerifyText   Lead Information
-#     PickList     Salutation         Mr. 
-#     VerifyPicklist        Salutation    Mr.   selected=True
-#     ClickText    First Name
-#     TypeText     First Name         Lead
-#     Sleep        2s
-#     ClickText    Last Name
-#     TypeText     Last Name          01
-#     Sleep        2s
-#     CLickText    Company
-#     TypeText     Company            Cyntexa
-#     Sleep        2s
-#     Picklist     Lead Status        Open - Not Contacted
-#     Sleep        2s
-#     VerifyPicklist        Lead Status         Open - Not Contacted       selected=True
-#     Sleep                 2s
-#     ClickText             Save                partial_match=False
-#     VerifyText            Lead 01
+Create a Lead Record
+    Login To Salesforce
+    ClickText    Leads
+    VerifyText   Change Owner
+    ClickText    New                partial_match=False
+    VerifyText   Lead Information
+    PickList     Salutation         Mr. 
+    VerifyPicklist        Salutation    Mr.   selected=True
+    ClickText    First Name
+    TypeText     First Name         Lead
+    Sleep        2s
+    ClickText    Last Name
+    TypeText     Last Name          01
+    Sleep        2s
+    CLickText    Company
+    TypeText     Company            Cyntexa
+    Sleep        2s
+    Picklist     Lead Status        Open - Not Contacted
+    Sleep        2s
+    VerifyPicklist        Lead Status         Open - Not Contacted       selected=True
+    Sleep                 2s
+    ClickText             Save                partial_match=False
+    VerifyText            Lead 01
 
 Creating a dynamic lead
     Login To Salesforce
