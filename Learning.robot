@@ -5,6 +5,9 @@ Documentation                  New test suite
 Library                        QForce
 Suite Setup                    Open Browser                about:blank                 chrome
 Suite Teardown                 Close All Browsers
+*** Variables ***
+@{ACCOUNT_NAMES}               Account                     Account1                    Account2
+${account_name}
 
 
 
@@ -153,18 +156,18 @@ Opportunity IF ELSE
     VerifyText                 PHDUKCXF-
     ClickText                  Details
     ${stage_value}             GetText                     xpath\=//records-record-layout-item[@field-label\='Stage']
-    IF                        $stage_value == "Prospecting"
-        LOG                   Stage is ${stage_value} 
+    IF                         $stage_value == "Prospecting"
+        LOG                    Stage is ${stage_value}
     ELSE
-        LOG                   Stage is nothing   
+        LOG                    Stage is nothing
     END
 
 Create Accounts With Enumerate
 @{ACCOUNT_NAMES}    Account1    Account2    Account
     Login To Salesforce
-    ClickText    Accounts
-    FOR    ${index}    ${account_name}    IN ENUMERATE    @{ACCOUNT_NAMES}
-        ClickText      New
-        TypeText       xpath\=//records-record-layout-base-input[@data-input-element-id\='input-field']    ${account_name}
-        Log            Create Account ${index}: ${account_name}
-        ClickText      Save & New                        partial_match= True
+    ClickText                  Accounts
+    FOR                        ${index}                    ${account_name}             IN ENUMERATE     @{ACCOUNT_NAMES}
+        ClickText              New
+        TypeText               xpath\=//records-record-layout-base-input[@data-input-element-id\='input-field']             ${account_name}
+        Log                    Create Account ${index}: ${account_name}
+        ClickText              Save & New                  partial_match= True
