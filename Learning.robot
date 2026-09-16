@@ -202,9 +202,23 @@ Assignment Module 4
     ClickText    Price Book
     TypeText     Price Book                 Standard
     ClickText    Save                       partial_match= False
+    Sleep        2s
     ClickText    xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
     ClickText    Add Products
-    ClickCheckbox                        GenWatt Diesel 1000kW                   on
-    ClickText                        Next                        partial_match= False
-    UseModal                        On
-    
+    ClickElement                        xpath=//input[@aria-describedby='Search']
+    ${product_name}                        Create List          GenWatt Diesel 1000kW    Installation: Portable    Installation: Industrial - Low
+    # ClickCheckbox                        GenWatt Diesel 1000kW                   on
+    # ClickText                        Next                        partial_match= False
+    # UseModal                        On
+    # ClickText                       Quantity
+    # TypeText                        Quantity                     1
+    # CLickText                       Save                        partial_match= False
+    FOR    ${product_item}    IN                        @{product_name}    
+        TypeText         Search Products           ${product_item}
+        ClickElement     xpath=//lightning-icon[@icon-name='utility:search']
+        ClickElement     xpath=//div[@role='listbox']
+        ClickCheckbox    ${product_item}           on
+    END
+    ClickText            Next                      partial_match= False
+    FOR                  ${products_in_opp}        IN                        @{product_name}
+
