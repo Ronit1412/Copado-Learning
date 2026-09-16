@@ -220,5 +220,8 @@ Assignment Module 4
         ClickCheckbox    ${product_item}           on
     END
     ClickText            Next                      partial_match= False
-    FOR                  ${products_in_opp}        IN                        @{product_name}
-
+    FOR                  ${Product}        IN                        @{product_name}
+        ClickElement     xpath=//tr[.//a[text()='${Product}']]//button[contains(@title,'Edit Quantity')]
+        Sleep            1s
+        TypeText         Quantity          1
+    END    
