@@ -201,3 +201,10 @@ Assignment Module 4
     Sleep        5s
     ClickText    Price Book
     TypeText     Price Book                 Standard
+    ClickText    Save                       partial_match= False
+    ClickText    xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
+    ClickText    Add Products
+    ClickCheckbox                        GenWatt Diesel 1000kW                   on
+    ClickText                        Next                        partial_match= False
+    UseModal                        On
+    
