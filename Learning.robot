@@ -196,4 +196,8 @@ Assignment Module 4
     ClickText    Save                       partial_match= False
     ClickText    Details
     ClickText    xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
-
+    UseModal     On
+    CLickText    Choose Price Book          partial_match= True
+    Sleep        5s
+    ClickText    Price Book
+    TypeText     Price Book                 Standard
