@@ -3,6 +3,7 @@ Library                        String
 Documentation                  New test suite
 # You can change imported library to "QWeb" if testing generic web application, not Salesforce.
 Library                        QForce
+Library    DateTime
 Suite Setup                    Open Browser                about:blank                 chrome
 Suite Teardown                 Close All Browsers
 *** Variables ***
@@ -126,7 +127,7 @@ Practice For IF ELSE
     Login To Salesforce
     Sleep                      2s
     ClickText                  Accounts
-    IF                         "Account Name" == "Ronit"                               partial_match= False
+    IF                         "Account Name" == "Ronit"
     Log                        Account IS Present
     ELSE
         Log                    Account IS Not Present
@@ -166,8 +167,33 @@ Create Accounts With Enumerate
 @{ACCOUNT_NAMES}    Account1    Account2    Account
     Login To Salesforce
     ClickText                  Accounts
-    FOR                        ${index}                    ${account_name}             IN ENUMERATE     @{ACCOUNT_NAMES}
+    FOR                        ${index}    ${account_name}    IN ENUMERATE    @{ACCOUNT_NAMES}
         ClickText              New
         TypeText               xpath\=//records-record-layout-base-input[@data-input-element-id\='input-field']             ${account_name}
         Log                    Create Account ${index}: ${account_name}
         ClickText              Save & New                  partial_match= True
+    END
+
+Assignment Module 4
+    Login To Salesforce
+    ${ran_string}=    Generate Random String    5
+    ${current_date}=                        Get Current Date    result_format= %H:%M
+    ${closed_date}=                        Get Current Date     increment= 7days    result_format=%m/%d/%Y
+    ${opp_name}                        Catenate                 ${ran_string}    ${current_date}
+    ClickText    Opportunities
+    ClickText    New                        partial_match= False
+    Sleep        2s
+    UseModal     On
+    ClickText    Opportunity Name
+    TypeText     Opportunity Name           ${opp_name}
+    Sleep        2s
+    ClickText    Close Date
+    TypeText     Close Date                 ${closed_date}
+    Sleep        2s
+    CLickText    Stage                      
+    PickList     Stage                      Qualification
+    Sleep        2s
+    ClickText    Save                       partial_match= False
+    ClickText    Details
+    ClickText    xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
+
