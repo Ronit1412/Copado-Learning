@@ -10,7 +10,7 @@ Suite Teardown                 Close All Browsers
 *** Variables ***
 @{ACCOUNT_NAMES}               Account                     Account1                    Account2
 ${account_name}
-
+@{product_name}            Create List                 GenWatt Diesel 1000kW       Installation: Portable      Installation: Industrial - Low
 
 
 
@@ -209,7 +209,6 @@ Assignment Module 4
     ClickElement               xpath=//input[@aria-describedby='Search']
     @{product_name}            Create List                 GenWatt Diesel 1000kW       Installation: Portable      Installation: Industrial - Low
     @{product_quantity}        Create List                 1                        3                        2
-    &{product_price}           Create Dictionary
     # ClickCheckbox            GenWatt Diesel 1000kW       on
     # ClickText                Next                        partial_match= False
     # UseModal                 On
@@ -231,6 +230,16 @@ Assignment Module 4
     FOR                        ${index}                    ${Product}                  IN ENUMERATE                @{product_name}
         ClickElement           xpath=//tr[.//a[text()='${Product}']]//button[contains(@title,'Edit Quantity')]     clicks=2
         TypeText               Quantity                    ${product_quantity}[${index}]                           anchor=${Product}
-        ${sales_price}=    Get Text    xpath\=//tr[.//a[text()\='${Product}']]//span[contains(@class,'forceOutputCurrency')]                     
-        Set To Dictionary      ${product_price}            ${Product}                        ${sales_price}                                  
+        # ${sales_price}=    Get Text    xpath\=//tr[.//a[text()\='${Product}']]//span[contains(@class,'forceOutputCurrency')]                                                                               
+    END
+    ClickText              Save
+    ClickText              Products                        partial_match=False
+
+    &{product_price}       Create Dictionary
+    &{product_quantity}    Create Dictionary
+    FOR    ${prod}    IN                        @{product_name}    
+        ${quantity}=                        Get Text       xpath\=//tr[.//a[text()\='${prod}']]//span[contains(@class,'uiOutputNumber')] 
+        ${sales_price}=                     Get Text       xpath\=//tr[.//a[text()\='${prod}']]//span[contains(@class,'forceOutputCurrency')]
+        ${product_quantity}[${prod}]=       Set Variable    ${quantity}
+        ${product_price}=                   Set Variable    ${sales_price}   
     END
