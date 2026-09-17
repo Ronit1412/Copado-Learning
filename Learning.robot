@@ -192,7 +192,7 @@ Assignment Module 4
     TypeText                   Close Date                  ${closed_date}
     Sleep                      2s
     CLickText                  Stage
-    PickList                   Stage                       Qualification
+    PickList                   Stage                       Qualification  
     Sleep                      2s
     ClickText                  Save                        partial_match= False
     ClickText                  Details
@@ -250,3 +250,13 @@ Assignment Module 4
         ${product_total}=                   Evaluate          ${quantity} * ${sales_price}
         ${total_amount}=                    Evaluate          ${total_amount} + ${product_total}          
     END
+    ClickElement                        xpath=//a[contains(text(),'${opp_name}')]
+    CLickText                        Details
+    ${opportunity_amount}=           Get Text                 xpath\=//sfa-output-opportunity-amount[@slot\='outputField']
+    ${opportunity_amount}=    Remove String    ${opportunity_amount}    $    ,
+
+    IF    ${total_amount} == ${opportunity_amount}
+        Log    Product Total and Opportunity Amount are equal:${total_amount} : ${opportunity_amount}
+    ELSE
+        Log    Product Total and Opportunity Amount are NOT equal
+        END
