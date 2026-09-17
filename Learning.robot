@@ -243,3 +243,10 @@ Assignment Module 4
         ${product_quantity}[${prod}]=       Set Variable    ${quantity}
         ${product_price}=                   Set Variable    ${sales_price}   
     END
+    ${total_amount}=    Set Variable    0
+    FOR                 ${produ}        IN      @{product_name}
+        ${quantity}=       Convert To Number    ${quantity}
+        ${sales_price}=    Remove String    ${sales_price}    $    ,  
+        ${product_total}=                   Evaluate          ${quantity} * ${sales_price}
+        ${total_amount}=                    Evaluate          ${total_amount} + ${product_total}          
+    END
