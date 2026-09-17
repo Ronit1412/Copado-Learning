@@ -258,5 +258,5 @@ Assignment Module 4
     IF    ${total_amount} == ${opportunity_amount}
         Log    Product Total and Opportunity Amount are equal:${total_amount} : ${opportunity_amount}
     ELSE
-        Log    Product Total and Opportunity Amount are NOT equal
+        Log    Product Total and Opportunity Amount are NOT equal                       
         END
