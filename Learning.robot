@@ -4,6 +4,7 @@ Documentation                  New test suite
 # You can change imported library to "QWeb" if testing generic web application, not Salesforce.
 Library                        QForce
 Library                        DateTime
+Library    Collections
 Suite Setup                    Open Browser                about:blank                 chrome
 Suite Teardown                 Close All Browsers
 *** Variables ***
@@ -206,8 +207,9 @@ Assignment Module 4
     ClickText                  xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
     ClickText                  Add Products
     ClickElement               xpath=//input[@aria-describedby='Search']
-    ${product_name}            Create List                 GenWatt Diesel 1000kW       Installation: Portable      Installation: Industrial - Low
-    ${product_quantity}        Create Dictionary           GenWatt Diesel 1000kW=1     Installation: Portable=3    Installation: Industrial - Low=2
+    @{product_name}            Create List                 GenWatt Diesel 1000kW       Installation: Portable      Installation: Industrial - Low
+    @{product_quantity}        Create List                 1                        3                        2
+    &{product_price}           Create Dictionary
     # ClickCheckbox            GenWatt Diesel 1000kW       on
     # ClickText                Next                        partial_match= False
     # UseModal                 On
@@ -229,5 +231,6 @@ Assignment Module 4
     FOR                        ${index}                    ${Product}                  IN ENUMERATE                @{product_name}
         ClickElement           xpath=//tr[.//a[text()='${Product}']]//button[contains(@title,'Edit Quantity')]     clicks=2
         TypeText               Quantity                    ${product_quantity}[${index}]                           anchor=${Product}
+        ${sales_price}=    Get Text    xpath\=//tr[.//a[text()\='${Product}']]//span[contains(@class,'forceOutputCurrency')]                     
+        Set To Dictionary      ${product_price}            ${Product}                        ${sales_price}                                  
     END
-    ClickText                  Save
