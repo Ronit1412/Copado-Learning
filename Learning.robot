@@ -5,6 +5,7 @@ Documentation                  New test suite
 Library                        QForce
 Library                        DateTime
 Library    Collections
+Library    QWeb
 Suite Setup                    Open Browser                about:blank                 chrome
 Suite Teardown                 Close All Browsers
 *** Variables ***
@@ -256,7 +257,7 @@ Assignment Module 4
     ${opportunity_amount}=    Remove String    ${opportunity_amount}    $    ,
     ${opportunity_amount}     Convert To Number                        ${opportunity_amount}
     IF    ${total_amount} == ${opportunity_amount}
-        Log    Product Total and Opportunity Amount are equal:${total_amount} : ${opportunity_amount}
+        Log To Console        Product Total And Opportunity Amount Are Equal
     ELSE
         Log    Product Total and Opportunity Amount are NOT equal                       
         END
