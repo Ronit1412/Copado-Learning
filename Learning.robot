@@ -178,6 +178,7 @@ Create Accounts With Enumerate
 
 Assignment Module 4
     Login To Salesforce
+    SetConfig    SearchMode    Draw       # element ko blue box se highlight karega
     ${ran_string}=             Generate Random String      5
     ${current_date}=           Get Current Date            result_format= %H:%M
     ${closed_date}=            Get Current Date            increment= 7days            result_format=%m/%d/%Y
