@@ -16,6 +16,12 @@ Login In Salesforce
     ClickText                  Log In
     TypeText                   Verification Code           CRLW57Z9SO
     ClickText                  Verify
+    SLeep                      5s
 Creating lead
     [Tags]    Regression
+    CLickText    Leads
+    ClickText    New    partial_match=False
+    UseModal     On
+    ClickText
+
     
