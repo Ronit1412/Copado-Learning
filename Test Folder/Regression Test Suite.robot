@@ -14,7 +14,7 @@ Login In Salesforce
     ClickText                  Log In
     TypeText                   Password                    ${password}
     ClickText                  Log In
-    TypeText                   Verification Code           CRLW57Z9SO
+    TypeText                   Verification Code           GXMJO8MK8Q
     ClickText                  Verify
     SLeep                      5s
 Creating lead
@@ -22,6 +22,28 @@ Creating lead
     CLickText    Leads
     ClickText    New    partial_match=False
     UseModal     On
-    ClickText
+    ${random_name}=     Generate Random String    8
+    ${company_name}=    Generate Random String    10
+    Set Suite Variable                        ${lead_name}    ${random_name}
+    Set Suite Variable                        ${lead_company_name}    ${company_name}
+    ClickText                        Last Name
+    TypeText                        Last Name                        ${lead_name}
+    ClickText                       Company
+    TypeText                       Company                        ${lead_company_name}
+    ClickText                       Save                        partial_match=False
+    ClickText                       Show more actions
+    CLickText                       Convert
+    UseModal                        On
+    ClickText                       Convert                     partial_match=False
+    UseModal                        On
+    ClickText                       Go to Leads                 partial_match=False
+
+Verify Account
+    ClickText    Accounts
+    VerifyText    ${lead_name}
+
+
+
+
 
     
