@@ -42,6 +42,15 @@ Verify Account
     ClickText    Accounts
     VerifyText    ${lead_name}
 
+Verify Contact
+    ClickText    Contacts
+    VerifyText    ${lead_company_name}
+
+Verify Opportunity
+    ClickText    Opportunity
+    VerifyText    ${lead_company_name}
+
+
 
 
 
