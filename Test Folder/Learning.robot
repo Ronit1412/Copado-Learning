@@ -22,7 +22,7 @@ Login To Salesforce
     ClickText                  Log In
     TypeText                   Password                    ${password}
     ClickText                  Log In
-    TypeText                   Verification Code           3AQHOM9AKQ
+    TypeText                   Verification Code           GXMJO8MK8Q
     ClickText                  Verify
 *** Test Cases ***
 Create a Account Record
