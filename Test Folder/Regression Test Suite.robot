@@ -47,12 +47,30 @@ Verify Contact
     VerifyText    ${lead_company_name}
 
 Verify Opportunity
-    ClickText    Opportunity
+    ClickText    Opportunities
     VerifyText    ${lead_company_name}
+    ClickText     ${lead_company_name}
 
+Adding Products
+    ClickText                  xpath\=//article[@aria-label\='Products']//div[@class\='actionsContainer']
+    ClickText                  Add Products
+    ClickElement               xpath=//input[@aria-describedby='Search']
+    @{product_name}            Create List                 GenWatt Diesel 1000kW       Installation: Portable      Installation: Industrial - Low
+    @{product_quantity}        Create List                 1 
 
+    FOR                        ${product_item}             IN                          @{product_name}
+        TypeText               Search Products             ${product_item}
+        ClickElement           xpath=//lightning-icon[@icon-name='utility:search']
+        ClickElement           xpath=//div[@role='listbox']
+        ClickCheckbox          ${product_item}             on
+    END
+    ClickText                  Next                        partial_match= False
 
-
-
-
+    FOR                        ${index}                    ${Product}                  IN ENUMERATE                @{product_name}
+        ClickElement           xpath=//tr[.//a[text()='${Product}']]//button[contains(@title,'Edit Quantity')]     clicks=2
+        TypeText               Quantity                    ${product_quantity}[${index}]                           anchor=${Product}
+                                                                                   
+    END
+    ClickText              Save
+    ClickText              Products                        partial_match=False      
     
